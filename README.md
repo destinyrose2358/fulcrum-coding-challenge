@@ -11,3 +11,7 @@ This application uses React.
 * `npm run start` - starts the application
 * Navigate to localhost:3000
 * the initial page allows you to add items to the receipt, then just press **_Calculate Total_**
+
+## Formatting
+
+* **_Item_**: `js { categories: [Array], basePrice: [Integer], quantity: [Integer] }`
