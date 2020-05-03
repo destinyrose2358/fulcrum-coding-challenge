@@ -1,22 +1,36 @@
 import Item from "./item";
+window.Item = Item;
 
 export default class ShoppingCart {
   constructor() {
     this.items = {};
   }
 
+  addItems(items) {
+    items.forEach(item => this.addItem(item));
+  }
+
   addItem(itemObject) {
-    const name = Item.generateFullItemName(itemObject);
-    if ( this.items[name] ) this.items[name].increaseQuantityBy()
+    let itemJSON = JSON.stringify({
+      categories: itemObject.categories,
+      basePrice: itemObject.basePrice,
+      name: itemObject.name
+    });
+
+    if ( this.items[itemJSON] ) {
+      this.items[itemJSON].increaseQuantityBy(itemObject.quantity);
+    } else {
+      this.items[itemJSON] = new Item(itemObject);
+    }
   }
 
   calculateReceipt() {
     let calculatedReceipt = Object.values(this.items).reduce(
       ({ finalItemPrices, totalSalesTax, total }, item) => {
-        const { salesTax, name } = item;
-        const subtotal = item.basePrice + salesTax;
+        const { salesTax, fullName, basePrice } = item;
+        const subtotal = basePrice + salesTax;
 
-        finalItemPrices[name] = subtotal;
+        finalItemPrices[fullName] = subtotal;
         totalSalesTax += salesTax;
         total += subtotal;
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 const BasicInputComponent = ({
-  updateItems,
+  updateShoppingCart,
   updateSelectedTab,
   selectedTab,
   title,
@@ -29,7 +29,7 @@ const BasicInputComponent = ({
         className="input-tab"
       >
         <p>{ title }</p>
-        <render updateItems={updateItems} />
+        <render updateShoppingCart={updateShoppingCart} />
       </div>
   )
 }

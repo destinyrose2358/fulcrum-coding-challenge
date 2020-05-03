@@ -8,16 +8,25 @@ const CategoriesTaxRates = {
 };
 
 export default class Item {
-  constructor(...itemArray) {
-    let { basePrice, categories, quantity } = itemArray;
-    this.name = this.generateFullItemName(itemObject);
-    this.basePrice = basePrice + 0;
-    this.salesTax = this.findSalesTaxFor(itemObject);
-    this.categories = categories;
+  constructor(itemObject) {
+    debugger;
+    let { basePrice, categories, quantity, name } = itemObject;
+    this.name = name;
+    this.categories = new Set(categories);
     this.quantity = quantity + 0;
+    this.fullName = this.generateFullItemName();
+    this.basePrice = basePrice + 0;
+    this.salesTax = this.findSalesTax();
   }
 
-  findSalesTaxFor({ categories, basePrice, quantity }) {
+  increaseQuantityBy(number) {
+    this.quantity += number;
+    this.fullName = this.generateFullItemName();
+    this.salesTax = this.findSalesTax()
+  }
+
+  findSalesTax() {
+    let { categories, basePrice, quantity } = this;
     let salesTaxRate = [...categories].reduce((currentTotal, categorie) => {
       return currentTotal + CategoriesTaxRates[categorie];
     }, 0);
@@ -28,7 +37,12 @@ export default class Item {
     return Math.ceil(tax * 20) / 20;
   }
 
-  generateFullItemName({ categories, name, quantity }) {
+  generateFullItemName(itemObject = {
+    categories: this.categories,
+    name: this.name,
+    quantity: this.quantity
+  }) {
+    let { categories, name, quantity } = itemObject;
     let fullName = `${quantity} `;
     if (categories.has("imported")) fullName += "imported ";
     fullName += name;

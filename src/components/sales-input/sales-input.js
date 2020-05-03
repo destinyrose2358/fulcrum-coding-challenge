@@ -5,11 +5,10 @@ const SalesInput = (props) => {
 
   let [state, setState] = useState({
     selectedTab: null,
-    items: null,
     send: false
   });
 
-  const updateItems = (items) => setState({
+  const updateShoppingCart = (items) => setState({
     items,
     send: true
   });
@@ -25,17 +24,17 @@ const SalesInput = (props) => {
   ) : (
     <>
       {/* <RawInputTab
-        updateItems={updateItems}
+        updateShoppingCart={updateShoppingCart}
         updateSelectedTab={updateSelectedTab}
         selectedTab={selectedTab}
       /> */}
-      <InputToolTab
-        updateItems={updateItems}
+      {/* <InputToolTab
+        updateShoppingCart={updateShoppingCart}
         updateSelectedTab={updateSelectedTab}
         selectedTab={selectedTab}
-      />
+      /> */}
       {/* <FileInputTab
-        updateItems={updateItems}
+        updateShoppingCart={updateShoppingCart}
         updateSelectedTab={updateSelectedTab}
         selectedTab={selectedTab}
       /> */}
