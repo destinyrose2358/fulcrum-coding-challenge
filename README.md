@@ -14,4 +14,4 @@ This application uses React.
 
 ## Formatting
 
-* **_Item_**: `js { categories: [Array], basePrice: [Integer], quantity: [Integer] }`
+* **_Item_**: `js { basePrice: [Integer], categories: [Set], name: [String], quantity: [Integer] }`
