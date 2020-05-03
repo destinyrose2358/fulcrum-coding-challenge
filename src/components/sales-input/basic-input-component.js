@@ -4,30 +4,32 @@ const BasicInputComponent = ({
   updateItems,
   updateSelectedTab,
   selectedTab,
-  key
+  title
 }) => {
   
   const [state, setState] = useState({
-    input: []
+    items: []
   });
   
   return (
-    selectedTab === key ?
+    selectedTab !== title ?
       <button
-        OnClick={
+        onClick={
           (e) => {
             e.preventDefault();
-            updateSelectedTab(key);
+            updateSelectedTab(title);
           }
         }
       >
-        { key }
+        { title }
       </button>
     :
       <div
         className="input-tab"
       >
-        { key }
+        <p>{ title }</p>
       </div>
   )
 }
+
+export default BasicInputComponent;

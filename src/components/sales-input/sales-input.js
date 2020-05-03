@@ -1,43 +1,46 @@
 import React, { useState } from "react";
+import InputToolTab from "./input-tool-tab";
 
 const SalesInput = (props) => {
 
-    let [state, setState] = useState({
-        selectedTab: null,
-        items: null,
-        send: false
-    });
+  let [state, setState] = useState({
+    selectedTab: null,
+    items: null,
+    send: false
+  });
 
-    const updateItems = (items) => setState(currentState => {
-      currentState.items = items;
-      currentState.send = true;
-    });
+  const updateItems = (items) => setState({
+    items,
+    send: true
+  });
 
-    const updateSelectedTab = (key) => setState(currentState => {
-      currentState.selectedTab = key;
-    })
+  const updateSelectedTab = (key) => setState({
+    selectedTab: key
+  });
 
-    const { send, selectedTab } = state;
+  const { send, selectedTab } = state || {};
 
-    return send ? (
-      <>"test"</>
-    ) : (
-      <>
-        <RawInputTab
-          {...updateItems}
-          {...updateSelectedTab}
-          {...selectedTab}
-        />
-        <InputToolTab
-          {...updateItems}
-          {...updateSelectedTab}
-          {...selectedTab}
-        />
-        <FileInputTab
-          {...updateItems}
-          {...updateSelectedTab}
-          {...selectedTab}
-        />
-      </>
-    );
+  return send ? (
+    <>"test"</>
+  ) : (
+    <>
+      {/* <RawInputTab
+        updateItems={updateItems}
+        updateSelectedTab={updateSelectedTab}
+        selectedTab={selectedTab}
+      /> */}
+      <InputToolTab
+        updateItems={updateItems}
+        updateSelectedTab={updateSelectedTab}
+        selectedTab={selectedTab}
+      />
+      {/* <FileInputTab
+        updateItems={updateItems}
+        updateSelectedTab={updateSelectedTab}
+        selectedTab={selectedTab}
+      /> */}
+    </>
+  );
 }
+
+export default SalesInput;

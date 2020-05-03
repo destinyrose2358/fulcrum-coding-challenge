@@ -1,14 +1,8 @@
 import React, { useState } from "react";
+import BasicInputComponent from "./basic-input-component";
 
-const InputToolTab = props => {
-
-    const [state, setState] = useState({
-        items: []
-    });
-
-    return (
-        <>
-            
-        </>
-    )
+const InputToolTab = (props) => {
+    return <BasicInputComponent title={"Input Tool"} {...props}  />
 }
+
+export default InputToolTab;
