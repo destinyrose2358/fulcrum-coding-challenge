@@ -4,7 +4,8 @@ const BasicInputComponent = ({
   updateItems,
   updateSelectedTab,
   selectedTab,
-  title
+  title,
+  render
 }) => {
   
   const [state, setState] = useState({
@@ -28,6 +29,7 @@ const BasicInputComponent = ({
         className="input-tab"
       >
         <p>{ title }</p>
+        <render updateItems={updateItems} />
       </div>
   )
 }
