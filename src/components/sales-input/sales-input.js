@@ -8,12 +8,36 @@ const SalesInput = (props) => {
         send: false
     });
 
-    const updateItems = (items) => setState(currentState => { currentState.items = items });
+    const updateItems = (items) => setState(currentState => {
+      currentState.items = items;
+      currentState.send = true;
+    });
 
-    return (
-        <>
-            <RawInputTab updateItems={updateItems} />
-            <InputToolTab updateItems={updateItems} />
-        </>
-    )
+    const updateSelectedTab = (key) => setState(currentState => {
+      currentState.selectedTab = key;
+    })
+
+    const { send, selectedTab } = state;
+
+    return send ? (
+      <>"test"</>
+    ) : (
+      <>
+        <RawInputTab
+          {...updateItems}
+          {...updateSelectedTab}
+          {...selectedTab}
+        />
+        <InputToolTab
+          {...updateItems}
+          {...updateSelectedTab}
+          {...selectedTab}
+        />
+        <FileInputTab
+          {...updateItems}
+          {...updateSelectedTab}
+          {...selectedTab}
+        />
+      </>
+    );
 }
