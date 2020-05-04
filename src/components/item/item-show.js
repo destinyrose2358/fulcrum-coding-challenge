@@ -14,11 +14,15 @@ const ItemShow = ({
   const [quantityText, setQuantityText] = useState(quantity + "");
 
   return (
-    <li>
+    <li
+      className="item-show"
+    >
       <p>
         {fullName}: {fullPrice}
       </p>
-      <aside className="item-show">
+      <aside
+        className="dropdown"
+      >
         <abbr title="Delete Item">
           <i
             className="fas fa-trash-alt"
@@ -27,8 +31,15 @@ const ItemShow = ({
               toggleUpdate();
             }}
           ></i>
-          <input
+        </abbr>
+        <label
+          forhtml="item-show-quantity"
+        >
+          qty: 
+        </label>
+        <input
             type="text"
+            id="item-show-quantity"
             value={quantityText}
             onChange={(e) => {
               const newValue = e.target.value;
@@ -38,7 +49,6 @@ const ItemShow = ({
             }}
             onBlur={() => setQuantityText(quantity)}
           />
-        </abbr>
       </aside>
     </li>
   );

@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import merge from "lodash.merge";
-import ItemIndex from "../item/item-index";
-import ReceiptShow from "../receipt-show";
 
 const AddItemForm = ({
   shoppingCart,
@@ -49,40 +46,49 @@ const AddItemForm = ({
           placeholder="Name"
           onChange={(e) => setName(e.target.value)}
         />
-        <label>
+        <label
+          forhtml="category"
+        >
           Please Select the Category that applies.
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <option value="basic">Basic</option>
-            <option value="book">Book</option>
-            <option value="food">Food</option>
-            <option value="medical">Medical</option>
-          </select>
         </label>
-        <label>
-          Quantity:
-          <input
-            type="text"
-            pattern="[0-9]*"
-            value={quantityText}
-            min={1}
-            onChange={updateQuantity}
-            onBlur={() => setQuantityText(quantity)}
-          />
+        <select
+          id="category"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <option value="basic">Basic</option>
+          <option value="book">Book</option>
+          <option value="food">Food</option>
+          <option value="medical">Medical</option>
+        </select>
+        <label
+          forhtml="add-item-quantity"
+        >
+          Quantity: 
         </label>
-        <label>
+        <input
+          id="add-item-quantity"
+          type="text"
+          pattern="[0-9]*"
+          value={quantityText}
+          min={1}
+          onChange={updateQuantity}
+          onBlur={() => setQuantityText(quantity)}
+        />
+        <label
+          forhtml="add-item-base-price"
+        >
           Base Price:
-          <input
-            type="text"
-            pattern="^[0-9]*.[0-9]{2}$"
-            min={0}
-            value={basePriceText}
-            onChange={updateBasePrice}
-            onBlur={() => setBasePriceText(basePrice)}
-          />
         </label>
+        <input
+          id="add-item-base-price"
+          type="text"
+          pattern="^[0-9]*.[0-9]{2}$"
+          min={0}
+          value={basePriceText}
+          onChange={updateBasePrice}
+          onBlur={() => setBasePriceText(basePrice)}
+        />
         <button
           onClick={(e) => {
             e.preventDefault();
