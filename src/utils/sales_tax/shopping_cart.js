@@ -9,6 +9,10 @@ export default class ShoppingCart {
     items.forEach(item => this.addItem(item));
   }
 
+  itemArray() {
+    return Object.values(this.items);
+  }
+
   updateItem(originalItem, changes) {
     if (changes["quantity"] === 0) this.removeItem(originalItem);
     const originalKey = originalItem.generateKey();
@@ -25,7 +29,7 @@ export default class ShoppingCart {
   }
 
   addItem(itemObject) {
-    let newItem = new Item(itemObject);
+    let newItem = new Item(itemObject, this);
     let itemJSON = newItem.generateKey();
 
     if ( this.items[itemJSON] ) {
@@ -39,22 +43,17 @@ export default class ShoppingCart {
 
   calculateReceipt() {
     let calculatedReceipt = Object.values(this.items).reduce(
-      ({ finalItemPrices, totalSalesTax, total }, item) => {
-        const { salesTax, fullName, basePrice } = item;
-        const subtotal = basePrice + salesTax;
-
-        finalItemPrices[fullName] = subtotal;
+      ({ totalSalesTax, total }, item) => {
+        const { salesTax, fullPrice } = item;
         totalSalesTax += salesTax;
-        total += subtotal;
+        total += fullPrice;
 
         return {
-          finalItemPrices,
           totalSalesTax,
           total,
         };
       },
       {
-        finalItemPrices: {},
         totalSalesTax: 0,
         total: 0,
       }

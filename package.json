@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "lodash.merge": "^4.6.2",
     "lodash.pick": "^4.4.0",
+    "node-sass": "^4.14.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
