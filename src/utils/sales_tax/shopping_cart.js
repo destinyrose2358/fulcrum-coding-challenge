@@ -9,6 +9,10 @@ export default class ShoppingCart {
     items.forEach(item => this.addItem(item));
   }
 
+  itemArray() {
+    return Object.values(this.items);
+  }
+
   updateItem(originalItem, changes) {
     if (changes["quantity"] === 0) this.removeItem(originalItem);
     const originalKey = originalItem.generateKey();

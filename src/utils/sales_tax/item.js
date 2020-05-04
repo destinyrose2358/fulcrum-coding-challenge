@@ -18,7 +18,7 @@ export default class Item {
     this.categories = new Set((categories.length && categories) || ["basic"]);
     this.quantity = quantity + 0;
     this.fullName = this.generateFullItemName();
-    this.basePrice = basePrice + 0;
+    this.basePrice = basePrice;
     this.salesTax = this.findSalesTax();
   }
 

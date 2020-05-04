@@ -13,6 +13,7 @@ function App() {
     <>
       <Switch>
         <Route path="/receipt">
+          {/* <SalesReceipt shoppingCart={shoppingCart} /> */}
         </Route>
         <Route path="/">
           <SalesInput shoppingCart={shoppingCart} />
