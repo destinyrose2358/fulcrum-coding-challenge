@@ -1,28 +1,26 @@
 import React from 'react';
+import { Route, Switch } from "react-router-dom"
 import logo from '../logo.svg';
 import '../stylings/App.css';
-import calculateReceipt from '../utils/sales_tax_calculator';
+import SalesInput from './sales-input/sales-input';
+import ShoppingCart from '../utils/sales_tax/shopping_cart';
+
+const shoppingCart = new ShoppingCart();
+window.shoppingCart = shoppingCart;
 
 function App() {
-  window.calculateReceipt = calculateReceipt;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <Switch>
+        <Route path="/receipt">
+        </Route>
+        <Route path="/">
+          <SalesInput shoppingCart={shoppingCart} />
+        </Route>
+      </Switch>
+      
+    </>
+  )
 }
 
 export default App;
