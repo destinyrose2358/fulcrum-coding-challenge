@@ -1,45 +1,40 @@
 import React, { useState } from "react";
 import InputToolTab from "./input-tool-tab";
+import { withRouter } from "react-router-dom";
 
 const SalesInput = (props) => {
 
-  let [state, setState] = useState({
-    selectedTab: null,
-    send: false
-  });
+  let [selectedTab, setSelectedTab] = useState("Input Tool");
 
-  const updateShoppingCart = (items) => setState({
-    items,
-    send: true
-  });
+  const { shoppingCart, history } = props;
 
-  const updateSelectedTab = (key) => setState({
-    selectedTab: key
-  });
-
-  const { send, selectedTab } = state || {};
-
-  return send ? (
-    <>"test"</>
-  ) : (
+  return (
     <>
       {/* <RawInputTab
-        updateShoppingCart={updateShoppingCart}
+        shoppingCart={shoppingCart}
         updateSelectedTab={updateSelectedTab}
         selectedTab={selectedTab}
       /> */}
-      {/* <InputToolTab
-        updateShoppingCart={updateShoppingCart}
-        updateSelectedTab={updateSelectedTab}
+      <InputToolTab
+        shoppingCart={shoppingCart}
+        updateSelectedTab={setSelectedTab}
         selectedTab={selectedTab}
-      /> */}
+      />
       {/* <FileInputTab
-        updateShoppingCart={updateShoppingCart}
+        shoppingCart={shoppingCart}
         updateSelectedTab={updateSelectedTab}
         selectedTab={selectedTab}
       /> */}
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          history.push("/receipt");
+        }}
+      >
+        Calculate Receipt
+      </button>
     </>
   );
 }
 
-export default SalesInput;
+export default withRouter(SalesInput);

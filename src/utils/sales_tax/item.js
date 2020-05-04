@@ -1,3 +1,4 @@
+import pick from "lodash.pick";
 
 const CategoriesTaxRates = {
   food: 0,
@@ -7,22 +8,35 @@ const CategoriesTaxRates = {
   imported: 0.05,
 };
 
+const MUTABLE_ATTRIBUTES = ["categories", "name", "basePrice", "quantity"];
+
 export default class Item {
+
   constructor(itemObject) {
-    debugger;
     let { basePrice, categories, quantity, name } = itemObject;
     this.name = name;
-    this.categories = new Set(categories);
+    this.categories = new Set((categories.length && categories) || ["basic"]);
     this.quantity = quantity + 0;
     this.fullName = this.generateFullItemName();
     this.basePrice = basePrice + 0;
     this.salesTax = this.findSalesTax();
   }
 
-  increaseQuantityBy(number) {
-    this.quantity += number;
+  update(changes) {
+    changes = pick(changes, MUTABLE_ATTRIBUTES);
+    Object.entries(changes).forEach(([attribute, newValue]) => {
+      this[attribute] = newValue;
+    });
     this.fullName = this.generateFullItemName();
-    this.salesTax = this.findSalesTax()
+    this.salesTax = this.findSalesTax();
+  }
+
+  generateKey(item = this) {
+    return JSON.stringify({
+      categories: item.categories,
+      basePrice: item.basePrice,
+      name: item.name
+    });
   }
 
   findSalesTax() {

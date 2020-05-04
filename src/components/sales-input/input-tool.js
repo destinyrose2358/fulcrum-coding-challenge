@@ -1,27 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
+import AddItemForm from "./add_item_form";
 
 const InputTool = ({
-  updateItems
+  shoppingCart
 }) => {
-
-  let [state, setState] = useState({
-    items: []
-  });
-
   return (
-    <form
-      className="items-form"
-    >
-      <button
-        onClick={e => {
-          e.preventDefault();
-          setState(currentState => ({
-            items: [...items, new ]
-          }))
-        }}
-      >
-        Add Item
-      </button>
-    </form>
-  )
+    <>
+      <AddItemForm shoppingCart={shoppingCart} />
+    </>
+  );
 }
+
+export default InputTool;

@@ -1,5 +1,4 @@
 import Item from "./item";
-window.Item = Item;
 
 export default class ShoppingCart {
   constructor() {
@@ -10,17 +9,31 @@ export default class ShoppingCart {
     items.forEach(item => this.addItem(item));
   }
 
+  updateItem(originalItem, changes) {
+    if (changes["quantity"] === 0) this.removeItem(originalItem);
+    const originalKey = originalItem.generateKey();
+    originalItem.update(changes);
+    const newKey = originalItem.generateKey();
+    if (originalKey !== newKey) {
+      delete this.items[originalKey];
+      this.items[newKey] = originalItem;
+    }
+  }
+
+  removeItem(originalItem) {
+    delete this.items[originalItem.generateKey()];
+  }
+
   addItem(itemObject) {
-    let itemJSON = JSON.stringify({
-      categories: itemObject.categories,
-      basePrice: itemObject.basePrice,
-      name: itemObject.name
-    });
+    let newItem = new Item(itemObject);
+    let itemJSON = newItem.generateKey();
 
     if ( this.items[itemJSON] ) {
-      this.items[itemJSON].increaseQuantityBy(itemObject.quantity);
+      this.items[itemJSON].update({
+        quantity: itemObject.quantity + this.items[itemJSON].quantity
+      });
     } else {
-      this.items[itemJSON] = new Item(itemObject);
+      this.items[itemJSON] = newItem;
     }
   }
 
