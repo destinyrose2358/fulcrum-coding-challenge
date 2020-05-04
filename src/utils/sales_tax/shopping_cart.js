@@ -29,7 +29,7 @@ export default class ShoppingCart {
   }
 
   addItem(itemObject) {
-    let newItem = new Item(itemObject);
+    let newItem = new Item(itemObject, this);
     let itemJSON = newItem.generateKey();
 
     if ( this.items[itemJSON] ) {
@@ -43,13 +43,10 @@ export default class ShoppingCart {
 
   calculateReceipt() {
     let calculatedReceipt = Object.values(this.items).reduce(
-      ({ finalItemPrices, totalSalesTax, total }, item) => {
-        const { salesTax, fullName, basePrice } = item;
-        const subtotal = basePrice + salesTax;
-
-        finalItemPrices[item.generateKey()] = subtotal;
+      ({ totalSalesTax, total }, item) => {
+        const { salesTax, fullPrice } = item;
         totalSalesTax += salesTax;
-        total += subtotal;
+        total += fullPrice;
 
         return {
           totalSalesTax,

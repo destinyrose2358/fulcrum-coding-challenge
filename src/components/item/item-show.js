@@ -1,20 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 
 const ItemShow = ({
   item: {
-    basePrice,
+    fullPrice,
     fullName,
-    salesTax
-  }
+    removeSelf,
+    update,
+    quantity
+  },
+  toggleUpdate
 }) => {
-  let fullPrice = basePrice + salesTax + "";
-  const decimalIdx = fullPrice.indexOf(".");
-  fullPrice = decimalIdx !== -1 ? fullPrice.slice(0, decimalIdx + 3) : fullPrice + ".00";
+  fullPrice = (fullPrice).toFixed(2);
+  const [quantityText, setQuantityText] = useState(quantity + "");
+
   return (
     <li>
-      <p>{fullName}: {fullPrice}</p>
+      <p>
+        {fullName}: {fullPrice}
+      </p>
+      <aside className="item-show">
+        <abbr title="Delete Item">
+          <i
+            className="fas fa-trash-alt"
+            onClick={() => {
+              removeSelf();
+              toggleUpdate();
+            }}
+          ></i>
+          <input
+            type="text"
+            value={quantityText}
+            onChange={(e) => {
+              const newValue = e.target.value;
+              if ( /^[0-9]*$/.test(newValue) ) setQuantityText(newValue);
+              if ( /^[1-9][0-9]*$/.test(newValue) ) update({ quantity: parseInt(newValue) });
+              toggleUpdate();
+            }}
+            onBlur={() => setQuantityText(quantity)}
+          />
+        </abbr>
+      </aside>
     </li>
-  )
+  );
 }
 
 export default ItemShow;

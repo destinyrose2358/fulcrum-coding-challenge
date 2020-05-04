@@ -1,10 +1,18 @@
 import React, { useState } from "react";
+import ItemIndex from "../item/item-index";
+import ReceiptShow from "../receipt-show";
 
 const BasicInputComponent = (props) => {
 
   const { Tool } = props;
 
   const CreatedComponent = ({ shoppingCart, updateSelectedTab, selectedTab, title }) => {
+
+    const [_, setUpdate] = useState(false);
+
+    const toggleUpdate = () => setUpdate(update => !update);
+
+    const classTitle = title.split(" ").map(word => word.toLowerCase()).join("-");
 
     return selectedTab !== title ? (
       <button
@@ -16,9 +24,11 @@ const BasicInputComponent = (props) => {
         {title}
       </button>
     ) : (
-      <div className="input-tab">
+      <div className={classTitle}>
+        <ItemIndex items={shoppingCart.itemArray()} toggleUpdate={toggleUpdate} />
+        <ReceiptShow receipt={shoppingCart.calculateReceipt()} />
         <p>{title}</p>
-        <Tool shoppingCart={shoppingCart} />
+        <Tool shoppingCart={shoppingCart} toggleUpdate={toggleUpdate} />
       </div>
     );
   };

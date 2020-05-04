@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import merge from "lodash.merge";
 import ItemIndex from "../item/item-index";
+import ReceiptShow from "../receipt-show";
 
 const AddItemForm = ({
-  shoppingCart
+  shoppingCart,
+  toggleUpdate
 }) => {
 
   const [category, setCategory] = useState("basic");
@@ -13,9 +15,6 @@ const AddItemForm = ({
   const [name, setName] = useState("");
   const [basePrice, setBasePrice] = useState("0.00");
   const [basePriceText, setBasePriceText] = useState("0.00");
-  const [_, setUpdate] = useState(false);
-
-  const toggleUpdate = () => setUpdate(update => !update);
 
   const reset = () => {
     setCategory("basic");
@@ -35,14 +34,14 @@ const AddItemForm = ({
   };
 
   const updateBasePrice = (e) => {
-    let newValue = e.target.value;
-    setBasePriceText(newValue);
-    if (/^[0-9]*.[0-9]{2}$/.test(newValue) ) setBasePrice(newValue);
+    let newValueText = e.target.value;
+    let newValue = parseFloat(newValueText).toFixed(2);
+    setBasePriceText(newValueText);
+    if (/^[0-9]*.[0-9]{2}$/.test(newValue)) setBasePrice(newValue);
   }
 
   return (
     <>
-      <ItemIndex items={shoppingCart.itemArray()} />
       <form className="items-form">
         <input
           type="text"
