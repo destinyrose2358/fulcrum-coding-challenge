@@ -47,18 +47,16 @@ export default class ShoppingCart {
         const { salesTax, fullName, basePrice } = item;
         const subtotal = basePrice + salesTax;
 
-        finalItemPrices[fullName] = subtotal;
+        finalItemPrices[item.generateKey()] = subtotal;
         totalSalesTax += salesTax;
         total += subtotal;
 
         return {
-          finalItemPrices,
           totalSalesTax,
           total,
         };
       },
       {
-        finalItemPrices: {},
         totalSalesTax: 0,
         total: 0,
       }
