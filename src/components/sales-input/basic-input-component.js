@@ -8,7 +8,7 @@ const BasicInputComponent = (props) => {
 
   const CreatedComponent = ({ shoppingCart, updateSelectedTab, selectedTab, title }) => {
 
-    const [_, setUpdate] = useState(false);
+    const setUpdate = useState(false)[1];
 
     const toggleUpdate = () => setUpdate(update => !update);
 
@@ -24,12 +24,17 @@ const BasicInputComponent = (props) => {
         {title}
       </button>
     ) : (
-      <div className={classTitle}>
-        <ItemIndex items={shoppingCart.itemArray()} toggleUpdate={toggleUpdate} />
+      <>
+        <ItemIndex
+          items={shoppingCart.itemArray()}
+          toggleUpdate={toggleUpdate}
+        />
         <ReceiptShow receipt={shoppingCart.calculateReceipt()} />
-        <p>{title}</p>
-        <Tool shoppingCart={shoppingCart} toggleUpdate={toggleUpdate} />
-      </div>
+        <div className={`item-input ${classTitle}`}>
+          <p>{title}</p>
+          <Tool shoppingCart={shoppingCart} toggleUpdate={toggleUpdate} />
+        </div>
+      </>
     );
   };
 

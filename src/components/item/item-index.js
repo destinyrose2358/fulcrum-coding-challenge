@@ -8,7 +8,10 @@ const ItemIndex = ({
   const itemShowComponents = items.map(item => <ItemShow item={item} key={item.generateKey()} toggleUpdate={toggleUpdate} />);
 
   return (
-    <ul>
+    <ul
+      className="item-index"
+    >
+      <p>Receipt</p>
       {itemShowComponents}
     </ul>
   )

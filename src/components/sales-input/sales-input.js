@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import InputToolTab from "./input-tool-tab";
-import { withRouter } from "react-router-dom";
 
 const SalesInput = (props) => {
 
   let [selectedTab, setSelectedTab] = useState("Input Tool");
 
-  const { shoppingCart, history } = props;
+  const { shoppingCart } = props;
 
   return (
     <>
@@ -25,16 +24,8 @@ const SalesInput = (props) => {
         updateSelectedTab={updateSelectedTab}
         selectedTab={selectedTab}
       /> */}
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          history.push("/receipt");
-        }}
-      >
-        Calculate Receipt
-      </button>
     </>
   );
 }
 
-export default withRouter(SalesInput);
+export default SalesInput;

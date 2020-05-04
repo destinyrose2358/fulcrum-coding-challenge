@@ -1,6 +1,37 @@
-* {
+div, aside, p, button, ul, label {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: inherit;
+  background: transparent;
+  border: none;
+}
+
+input, select, option {
+  background: $accent-color;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+button {
+  background: $accent-color;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 10px;
+  &:hover {
+    background: darken($accent-color, 20%);
+  }
+}
+
+ul {
+  list-style: none;
 }
